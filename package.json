@@ -32,31 +32,36 @@
     "openapi",
     "swagger"
   ],
-  "scripts": {
-    "build-fast": "tsup src/index.ts --format esm,cjs",
-    "build": "pnpm run build-fast --dts-resolve",
-    "prepublishOnly": "pnpm run build"
-  },
-  "devDependencies": {
-    "@nestjs/common": "^10.2.7",
-    "@nestjs/swagger": "^7.1.14",
-    "@types/node": "^20.8.10",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2",
-    "zod": "^3.22.4"
-  },
-  "peerDependencies": {
-    "@nestjs/common": "^10.2.7",
-    "@nestjs/swagger": "^7.1.14",
-    "zod": "^3.22.4"
-  },
   "engines": {
     "node": ">=18"
+  },
+  "scripts": {
+    "build-fast": "tsup src/index.ts src/boot.ts --format esm,cjs",
+    "build": "pnpm run build-fast --dts-resolve",
+    "prepublishOnly": "pnpm run build",
+    "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts}\"",
+    "lint:fix": "eslint \"src/**/*.{js,mjs,cjs,ts,mts}\" --fix"
   },
   "dependencies": {
     "@anatine/zod-nestjs": "^2.0.3",
     "@anatine/zod-openapi": "^2.2.0",
     "@asteasolutions/zod-to-openapi": "^6.2.0",
     "openapi3-ts": "^4.1.2"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.2.7",
+    "@nestjs/swagger": "^7.1.14",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^10.2.7",
+    "@nestjs/swagger": "^7.1.14",
+    "@types/node": "^20.8.10",
+    "eslint": "^8.41.0",
+    "eslint-kit": "^10.0.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "zod": "^3.22.4",
+    "prettier": "^3.0.0"
   }
 }
