@@ -28,6 +28,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./boot": {
+      "types": "./dist/boot.d.ts",
+      "import": "./dist/boot.js",
+      "require": "./dist/boot.cjs"
     }
   },
   "keywords": [
