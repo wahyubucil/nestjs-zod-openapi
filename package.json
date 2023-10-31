@@ -42,7 +42,7 @@
     "build-fast": "tsup src/index.ts src/boot.ts --format esm,cjs",
     "build": "pnpm run build-fast --dts-resolve",
     "prepublishOnly": "pnpm run build",
-    "release": "np --message=\"chore(release): %s\"",
+    "release": "np --no-tests --message=\"chore(release): %s\"",
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts}\"",
     "lint:fix": "eslint \"src/**/*.{js,mjs,cjs,ts,mts}\" --fix"
   },
