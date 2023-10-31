@@ -1,0 +1,62 @@
+{
+  "name": "@wahyubucil/nestjs-zod-openapi",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "NestJS helper to easily use Zod with OpenAPI",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wahyubucil/nestjs-zod-openapi"
+  },
+  "homepage": "https://github.com/wahyubucil/nestjs-zod-openapi#readme",
+  "author": {
+    "name": "Wahyu Budi Saputra",
+    "url": "https://www.linkedin.com/in/wahyubucil"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "keywords": [
+    "nestjs",
+    "zod",
+    "openapi",
+    "swagger"
+  ],
+  "scripts": {
+    "build-fast": "tsup src/index.ts --format esm,cjs",
+    "build": "pnpm run build-fast --dts-resolve",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^10.2.7",
+    "@nestjs/swagger": "^7.1.14",
+    "@types/node": "^20.8.10",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.2.7",
+    "@nestjs/swagger": "^7.1.14",
+    "zod": "^3.22.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anatine/zod-nestjs": "^2.0.3",
+    "@anatine/zod-openapi": "^2.2.0",
+    "@asteasolutions/zod-to-openapi": "^6.2.0",
+    "openapi3-ts": "^4.1.2"
+  }
+}
