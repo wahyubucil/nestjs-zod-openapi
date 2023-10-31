@@ -35,6 +35,13 @@
       "require": "./dist/boot.cjs"
     }
   },
+  "typesVersions": {
+    "*": {
+      "boot": [
+        "./dist/boot.d.ts"
+      ]
+    }
+  },
   "keywords": [
     "nestjs",
     "zod",
