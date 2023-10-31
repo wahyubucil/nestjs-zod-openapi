@@ -62,10 +62,10 @@
     "@nestjs/common": "^10.2.7",
     "@nestjs/swagger": "^7.1.14",
     "@types/node": "^20.8.10",
-    "eslint": "^8.41.0",
-    "eslint-kit": "^10.0.0",
+    "eslint": "^8.52.0",
+    "eslint-kit": "^10.6.0",
     "np": "^8.0.4",
-    "prettier": "^3.0.0",
+    "prettier": "^3.0.3",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
     "zod": "^3.22.4"
