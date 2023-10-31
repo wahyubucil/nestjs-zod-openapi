@@ -54,9 +54,9 @@
     "openapi3-ts": "^4.1.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^10.2.7",
-    "@nestjs/swagger": "^7.1.14",
-    "zod": "^3.22.4"
+    "@nestjs/common": "^10",
+    "@nestjs/swagger": "^7",
+    "zod": "^3"
   },
   "devDependencies": {
     "@nestjs/common": "^10.2.7",
