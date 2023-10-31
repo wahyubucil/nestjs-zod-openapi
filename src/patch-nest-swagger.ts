@@ -18,16 +18,25 @@ interface Type<T = any> extends Function {
 }
 
 interface Options {
-  sort: 'default' | 'alpha' | 'localeCompare'
+  /** @default default */
+  sort?: 'default' | 'alpha' | 'localeCompare'
+}
+
+interface Modules {
+  schemaObjectFactoryModule?: typeof import('@nestjs/swagger/dist/services/schema-object-factory')
+  swaggerScannerModule?: typeof import('@nestjs/swagger/dist/swagger-scanner')
 }
 
 export function patchNestjsSwagger(
-  { sort = 'default' }: Options,
-  {
+  options: Options = {},
+  modules: Modules = {},
+) {
+  const { sort = 'default' } = options
+  const {
     schemaObjectFactoryModule = require('@nestjs/swagger/dist/services/schema-object-factory'),
     swaggerScannerModule = require('@nestjs/swagger/dist/swagger-scanner'),
-  },
-) {
+  } = modules
+
   const registry = new OpenAPIRegistry()
 
   /**
