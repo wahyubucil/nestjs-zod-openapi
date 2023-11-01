@@ -11,11 +11,20 @@ This package is a combination of two awesome packages:
 
 Most of the documentation here will be adopted from both of the packages. If something's missing here, please refer to each package's documentation. Thanks to both of the authors for making such awesome packages.
 
+## Table of contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Set up your app](#set-up-your-app)
+  - [Using `ZodValidationPipe`.](#using--zodvalidationpipe-)
+  - [Generate a schema](#generate-a-schema)
+  - [Use the schema in controller](#use-the-schema-in-controller)
+
 ## Installation
 
-Make sure you've set up the `@nestjs/swagger` module. [Read it here](https://docs.nestjs.com/openapi/introduction).
+Make sure you've set up the `@nestjs/swagger` module first. [Read it here](https://docs.nestjs.com/openapi/introduction).
 
-After set up is completed you can install this package and the Zod package:
+After set up is completed you can install this package and the [Zod][zod-url] package:
 
 ```sh
 # NPM
@@ -30,17 +39,17 @@ pnpm add zod @wahyubucil/nestjs-zod-openapi
 
 ### Set up your app
 
-1. Make sure you load the `@wahyubucil/nestjs-zod-openapi/boot` script from this package at the top of the main script
+1. Make sure you load the `@wahyubucil/nestjs-zod-openapi/boot` script from this package at the top of the main script.
 2. Patch the swagger so that it can use Zod types before you create the document.
 
 Example Main App:
 
 ```ts
-import '@wahyubucil/nestjs-zod-openapi/boot'
+import '@wahyubucil/nestjs-zod-openapi/boot' // <-- add this. The boot script should be on the top of this file.
 
 import { NestFactory } from '@nestjs/core'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { patchNestjsSwagger } from '@wahyubucil/nestjs-zod-openapi'
+import { patchNestjsSwagger } from '@wahyubucil/nestjs-zod-openapi' // <-- add this. Import the patch for NestJS Swagger
 
 import { AppModule } from './app.module'
 
@@ -53,7 +62,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build()
 
-  patchNestjsSwagger({ schemasSort: 'alpha' })
+  patchNestjsSwagger({ schemasSort: 'alpha' }) // <-- add this. This function should run before the `SwaggerModule.createDocument` function.
 
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
@@ -105,13 +114,13 @@ class CatsController {}
 class CatsController {
   // route-level
   @UsePipes(ZodValidationPipe)
-  async signIn() {}
+  async create() {}
 }
 ```
 
 ### Generate a schema
 
-Use [Zod](https://github.com/colinhacks/zod) to generate a schema.
+Use [Zod][zod-url] to generate a schema.
 
 Example schema:
 
@@ -130,7 +139,7 @@ export const User = z
   })
   .openapi('User')
 
-// This will make a new Zod schema with the name `CatShelter`
+// This will make a new Zod schema with the name 'CatShelter'
 export const Shelter = z
   .object({
     name: z.string(),
@@ -169,7 +178,7 @@ export class UpdateCatResponseDto extends createZodDto(
 ) {}
 ```
 
-### Use the schema in your controller
+### Use the schema in controller
 
 This follows the standard NestJS method of creating controllers.
 
@@ -179,16 +188,8 @@ Example Controller:
 
 ```ts
 // cats.controller.ts
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Patch,
-  Post,
-  UsePipes,
-} from '@nestjs/common'
-import { ApiCreatedResponse } from '@nestjs/swagger'
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger'
 import {
   CatDto,
   CreateCatResponseDto,
@@ -201,7 +202,7 @@ import {
 export class CatsController {
   // Use DTO as the type-safety helper
   @Get()
-  @ApiCreatedResponse({
+  @ApiOkResponse({
     type: GetCatsDto,
   })
   async findAll(): Promise<GetCatsDto> {
@@ -269,3 +270,4 @@ NOTE: You still need to explicitly define the response for the OpenAPI via the d
 [license-url]: LICENSE.md 'license'
 [typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
 [typescript-url]: "typescript"
+[zod-url]: https://github.com/colinhacks/zod
