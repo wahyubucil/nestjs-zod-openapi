@@ -19,7 +19,7 @@ interface Type<T = any> extends Function {
 
 interface Options {
   /** @default default */
-  sort?: 'default' | 'alpha' | 'localeCompare'
+  schemasSort?: 'default' | 'alpha' | 'localeCompare'
 }
 
 interface Modules {
@@ -31,7 +31,7 @@ export function patchNestjsSwagger(
   options: Options = {},
   modules: Modules = {},
 ) {
-  const { sort = 'default' } = options
+  const { schemasSort = 'default' } = options
   const {
     schemaObjectFactoryModule = require('@nestjs/swagger/dist/services/schema-object-factory'),
     swaggerScannerModule = require('@nestjs/swagger/dist/swagger-scanner'),
@@ -82,7 +82,7 @@ export function patchNestjsSwagger(
       ...doc.components?.schemas,
     }
 
-    if (sort === 'alpha') {
+    if (schemasSort === 'alpha') {
       const sortedSchemas = Object.entries(schemas).sort(([aKey], [bKey]) => {
         if (aKey < bKey) return -1
         if (aKey > bKey) return 1
@@ -90,7 +90,7 @@ export function patchNestjsSwagger(
       })
 
       openAPIObject.components.schemas = Object.fromEntries(sortedSchemas)
-    } else if (sort === 'localeCompare') {
+    } else if (schemasSort === 'localeCompare') {
       const sortedSchemas = Object.entries(schemas).sort(([aKey], [bKey]) =>
         aKey.localeCompare(bKey),
       )
