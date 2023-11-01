@@ -1,2 +1,10 @@
 export * from './patch-nest-swagger'
-export { createZodDto, ZodValidationPipe } from '@anatine/zod-nestjs'
+export {
+  CompatibleZodInfer,
+  CompatibleZodType,
+  createZodDto,
+  MergeZodSchemaOutput,
+  ZodDtoStatic,
+  ZodValidationPipe,
+  ZodValidationPipeOptions,
+} from '@anatine/zod-nestjs'
