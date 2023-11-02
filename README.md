@@ -16,7 +16,7 @@ Most of the documentation here will be adopted from both of the packages. If som
 - [Installation](#installation)
 - [Usage](#usage)
   - [Set up your app](#set-up-your-app)
-  - [Using `ZodValidationPipe`.](#using--zodvalidationpipe-)
+  - [Using `ZodValidationPipe`](#using-zodvalidationpipe)
   - [Generate a schema](#generate-a-schema)
   - [Use the schema in controller](#use-the-schema-in-controller)
 
@@ -33,6 +33,41 @@ npm i zod @wahyubucil/nestjs-zod-openapi
 yarn add zod @wahyubucil/nestjs-zod-openapi
 # PNPM
 pnpm add zod @wahyubucil/nestjs-zod-openapi
+```
+
+Zod requires us to enable `strict` mode in your `tsconfig.json`.
+
+```json
+// tsconfig.json
+{
+  // ...
+  "compilerOptions": {
+    // ...
+    "strict": true
+  }
+}
+```
+
+Example `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strict": true
+  }
+}
 ```
 
 ## Usage
@@ -79,7 +114,7 @@ The `patchNestjsSwagger` contains an options:
   - `alpha`: sorting based on the alpha-numeric order.
   - `localeCompare`: using JavaScript `localeCompare` to sort the order, it will use each locale sorting mechanism.
 
-### Using `ZodValidationPipe`.
+### Using `ZodValidationPipe`
 
 There are two ways to do it:
 
